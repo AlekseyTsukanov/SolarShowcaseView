@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/showcase_container"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:paddingLeft="@dimen/dimen_button_padding_left"
+        android:textSize="@dimen/dimen_title_text_size"
+        android:layout_marginBottom="@dimen/dimen_title_margin_bottom"
+        />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:paddingLeft="@dimen/dimen_button_padding_left"
+        android:textSize="@dimen/dimen_message_text_size"
+        android:layout_below="@+id/tv_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_dismiss"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:paddingBottom="@dimen/dimen_button_padding_bottom"
+        android:paddingTop="@dimen/dimen_button_padding_top"
+        android:paddingLeft="@dimen/dimen_button_padding_left"
+        android:paddingRight="@dimen/dimen_button_padding_right"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dimen_button_text_size"
+        android:visibility="gone"
+        android:layout_below="@+id/tv_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_skip"
+        android:layout_below="@+id/tv_dismiss"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dimen_button_text_size"
+        android:paddingBottom="@dimen/dimen_button_padding_bottom"
+        android:paddingTop="@dimen/dimen_button_padding_top"
+        android:paddingLeft="@dimen/dimen_button_padding_left"
+        android:paddingRight="@dimen/dimen_button_padding_right"
+        android:visibility="gone"
+        />
+
+</LinearLayout>
