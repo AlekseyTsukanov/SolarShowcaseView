@@ -121,7 +121,7 @@ public class SolarShowcaseView extends FrameLayout implements View.OnTouchListen
         mTitleTextView = (TextView) contentView.findViewById(R.id.tv_title);
         mContentTextView = (TextView) contentView.findViewById(R.id.tv_content);
         mDismissButton = (TextView) contentView.findViewById(R.id.tv_dismiss);
-        mSkipButton = (TextView) contentView.findViewById(R.id.tv_skip);
+       mSkipButton = (TextView) contentView.findViewById(R.id.tv_skip);
         mDismissButton.setOnClickListener(this);
         mSkipButton.setOnClickListener(this);
     }
@@ -240,6 +240,8 @@ public class SolarShowcaseView extends FrameLayout implements View.OnTouchListen
      */
     public void setTarget(ITarget target) {
         mTarget = target;
+        updateTitle();
+        updateMessage();
         updateDismissButton();
         updateSkipButton();
         if (mTarget != null) {
@@ -286,11 +288,11 @@ public class SolarShowcaseView extends FrameLayout implements View.OnTouchListen
             if (containerLayoutParams.bottomMargin != mContentBottomMargin) {
                 containerLayoutParams.bottomMargin = mContentBottomMargin;
                 layoutParamsChanged = true;
-            } else
+            }
             if (containerLayoutParams.topMargin != mContentTopMargin) {
                 containerLayoutParams.topMargin = mContentTopMargin;
                 layoutParamsChanged = true;
-            } else
+            }
             if (containerLayoutParams.gravity != mGravity) {
                 containerLayoutParams.gravity = mGravity;
                 layoutParamsChanged = true;
@@ -315,12 +317,14 @@ public class SolarShowcaseView extends FrameLayout implements View.OnTouchListen
     private void setTitle(CharSequence contentText) {
         if (mTitleTextView != null && !contentText.equals("")) {
             mTitleTextView.setText(contentText);
+            updateTitle();
         }
     }
 
     private void setMessage(CharSequence contentText) {
         if (mContentTextView != null) {
             mContentTextView.setText(contentText);
+            updateMessage();
         }
     }
 
@@ -344,9 +348,21 @@ public class SolarShowcaseView extends FrameLayout implements View.OnTouchListen
         }
     }
 
+    private void setTitleBackgroundColor(int backgroundColor) {
+        if (mTitleTextView != null) {
+            mTitleTextView.setBackgroundColor(backgroundColor);
+        }
+    }
+
     private void setContentTextColor(int textColour) {
         if (mContentTextView != null) {
             mContentTextView.setTextColor(textColour);
+        }
+    }
+
+    private void setContentBackgroundColor(int backgroundColour) {
+        if (mContentTextView != null) {
+            mContentTextView.setBackgroundColor(backgroundColour);
         }
     }
 
@@ -356,9 +372,21 @@ public class SolarShowcaseView extends FrameLayout implements View.OnTouchListen
         }
     }
 
+    private void setDismissBackgroundColor(int backgroundColour) {
+        if (mDismissButton != null) {
+            mDismissButton.setBackgroundColor(backgroundColour);
+        }
+    }
+
     private void setSkipTextColor(int textColor) {
         if (mSkipButton != null) {
             mSkipButton.setTextColor(textColor);
+        }
+    }
+
+    private void setSkipBackgroundColor(int backgroundColor) {
+        if (mSkipButton != null) {
+            mSkipButton.setBackgroundColor(backgroundColor);
         }
     }
 
@@ -427,13 +455,38 @@ public class SolarShowcaseView extends FrameLayout implements View.OnTouchListen
     protected void setConfig(SolarShowcaseConfig config) {
         setDelay(config.getDelay());
         setFadeDuration(config.getFadeDuration());
+        setTitleTextColor(config.getTitleTextColor());
+        setTitleBackgroundColor(config.getTitleBackgroundColor());
         setContentTextColor(config.getContentTextColor());
+        setContentBackgroundColor(config.getContentBackgroundColor());
         setDismissTextColor(config.getDismissTextColor());
+        setDismissBackgroundColor(config.getDismissBackgroundColor());
         setSkipTextColor(config.getSkipTextColor());
+        setSkipBackgroundColor(config.getSkipBackgroundColor());
         setMaskColour(config.getMaskColor());
         setShape(config.getShape());
         setShapePadding(config.getShapePadding());
         setRenderOverNavigationBar(config.getRenderOverNavigationBar());
+    }
+
+    private void updateTitle() {
+        if (mTitleTextView != null) {
+            if (TextUtils.isEmpty(mTitleTextView.getText())) {
+                mTitleTextView.setVisibility(GONE);
+            } else {
+                mTitleTextView.setVisibility(VISIBLE);
+            }
+        }
+    }
+
+    private void updateMessage() {
+        if (mContentTextView != null) {
+            if (TextUtils.isEmpty(mContentTextView.getText())) {
+                mContentTextView.setVisibility(GONE);
+            } else {
+                mContentTextView.setVisibility(VISIBLE);
+            }
+        }
     }
 
     private void updateDismissButton() {
@@ -627,6 +680,16 @@ public class SolarShowcaseView extends FrameLayout implements View.OnTouchListen
         }
 
         /**
+         * Title background color
+         * @param backgroundColor
+         * @return
+         */
+        public Builder setTitleBackgroundColor(int backgroundColor) {
+            showcaseView.setTitleBackgroundColor(backgroundColor);
+            return this;
+        }
+
+        /**
          * Setting up the message text color;
          * @param textColour
          * @return
@@ -635,6 +698,17 @@ public class SolarShowcaseView extends FrameLayout implements View.OnTouchListen
             showcaseView.setContentTextColor(textColour);
             return this;
         }
+
+        /**
+         * Content background color
+         * @param backgroundColor
+         * @return
+         */
+        public Builder setContentBackgroundColor(int backgroundColor) {
+            showcaseView.setContentBackgroundColor(backgroundColor);
+            return this;
+        }
+
 
         /**
          * Setting up the dismiss button text color;
@@ -647,12 +721,32 @@ public class SolarShowcaseView extends FrameLayout implements View.OnTouchListen
         }
 
         /**
+         * Dismiss button background color
+         * @param backgroundColor
+         * @return
+         */
+        public Builder setDismissBackgroundColor(int backgroundColor) {
+            showcaseView.setDismissBackgroundColor(backgroundColor);
+            return this;
+        }
+
+        /**
          * Setting up the skip button text color;
          * @param textColor
          * @return
          */
         public Builder setSkipTextColor(int textColor) {
             showcaseView.setSkipTextColor(textColor);
+            return this;
+        }
+
+        /**
+         * Skip button background color
+         * @param backgroundColor
+         * @return
+         */
+        public Builder setSkipBackgroundColor(int backgroundColor) {
+            showcaseView.setSkipBackgroundColor(backgroundColor);
             return this;
         }
 
@@ -846,6 +940,8 @@ public class SolarShowcaseView extends FrameLayout implements View.OnTouchListen
             }
         }, mDelayInMillis);
 
+        updateTitle();
+        updateMessage();
         updateDismissButton();
         updateSkipButton();
         return true;
